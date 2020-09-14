@@ -979,40 +979,40 @@ manage_toolings() {
     fi
 
     case $1 in
-        ?(--)list ) shift
+        ?\(--\)list ) shift
             list_toolings "$@"
             ;;
-        ?(--)upgradable ) shift
+        ?\(--\)upgradable ) shift
             object_upgradable tooling "$@"
             ;;
-        ?(--)install ) shift
+        ?\(--\)install ) shift
             install_tooling "$@"
             ;;
-        ?(--)remove ) shift
+        ?\(--\)remove ) shift
             remove_tooling "$@"
             ;;
-        ?(--)refresh ) shift
+        ?\(--\)refresh ) shift
             refresh_objects tooling "$@"
             ;;
-        ?(--)update ) shift
+        ?\(--\)update ) shift
             upgrade_object tooling "$@"
             ;;
-        ?(--)register ) shift
+        ?\(--\)register ) shift
             register_object tooling "$@"
             ;;
-        ?(--)package-list ) shift
+        ?\(--\)package-list ) shift
             list_object_packages tooling "$@"
             ;;
-        ?(--)package-install ) shift
+        ?\(--\)package-install ) shift
             manage_object_packages install tooling "$@"
             ;;
-        ?(--)package-remove ) shift
+        ?\(--\)package-remove ) shift
             manage_object_packages remove tooling "$@"
             ;;
-        ?(--)uuidgen ) shift
+        ?\(--\)uuidgen ) shift
             reset_machine_id tooling "$@"
             ;;
-        ?(--)maintain ) shift
+        ?\(--\)maintain ) shift
             maintain tooling "$@"
             ;;
         * )
@@ -1033,18 +1033,18 @@ manage_toolchains() {
     fi
 
     case $1 in
-        ?(--)list ) shift
+        ?\(--\)list ) shift
             local tooling=${1:-}
             assert_tooling_exists "$tooling" || return
             get_toolchains "$tooling"
             ;;
-        ?(--)install ) shift
+        ?\(--\)install ) shift
             local tooling=${1:-}
             assert_tooling_exists "$tooling" || return
             shift
             object_zypper "tooling:$tooling" --no-refresh install "$@" || return
             ;;
-        ?(--)remove ) shift
+        ?\(--\)remove ) shift
             local tooling=${1:-}
             assert_tooling_exists "$tooling" || return
             shift
@@ -1184,13 +1184,13 @@ manage_develpkgs() {
     fi
 
     case $1 in
-	?(--)list ) shift
+	?\(--\)list ) shift
             list_object_packages target "$@"
 	    ;;
-	?(--)install ) shift
+	?\(--\)install ) shift
             manage_object_packages install target "$@" || return
 	    ;;
-	?(--)remove ) shift
+	?\(--\)remove ) shift
             manage_object_packages remove target "$@" || return
 	    ;;
 	* )
@@ -2039,31 +2039,31 @@ manage_targets() {
     fi
 
     case $1 in
-	?(--)list ) shift
+	?\(--\)list ) shift
             list_targets "$@"
 	    ;;
-	?(--)upgradable ) shift
+	?\(--\)upgradable ) shift
             object_upgradable target "$@"
 	    ;;
-	?(--)install ) shift
+	?\(--\)install ) shift
             install_target "$@"
 	    ;;
-        ?(--)snapshot ) shift
+        ?\(--\)snapshot ) shift
             snapshot_target "$@"
             ;;
-        ?(--)reserve ) shift
+        ?\(--\)reserve ) shift
             reserve_target "$@"
             ;;
-	?(--)remove ) shift
+	?\(--\)remove ) shift
 	    remove_target "$@"
 	    ;;
-	?(--)refresh ) shift
+	?\(--\)refresh ) shift
             refresh_objects target "$@"
 	    ;;
-	?(--)update ) shift
+	?\(--\)update ) shift
             upgrade_object target "$@"
 	    ;;
-	?(--)sync ) shift
+	?\(--\)sync ) shift
             local target=${1:-}
             assert_name_valid "$target" || return
 	    if [[ ! $INSIDE_VBOX ]]; then
@@ -2077,7 +2077,7 @@ manage_targets() {
             synchronise_target "$@" || return
             updateQtCreatorTargets --name "$target" --target-xml "$TARGETS_XML"
 	    ;;
-	?(--)import ) shift
+	?\(--\)import ) shift
             assert_name_valid "${1:-}" || return
 	    if [[ ! $INSIDE_VBOX ]]; then
 	        echo >&2 "This operation is only valid for SDK in VirtualBox"
@@ -2085,22 +2085,22 @@ manage_targets() {
 	    fi
 	    import_target "$@"
 	    ;;
-	?(--)register ) shift
+	?\(--\)register ) shift
             register_object target "$@"
 	    ;;
-        ?(--)package-list ) shift
+        ?\(--\)package-list ) shift
             list_object_packages target "$@"
             ;;
-        ?(--)package-install ) shift
+        ?\(--\)package-install ) shift
             manage_object_packages install target "$@"
             ;;
-        ?(--)package-remove ) shift
+        ?\(--\)package-remove ) shift
             manage_object_packages remove target "$@"
             ;;
-        ?(--)uuidgen ) shift
+        ?\(--\)uuidgen ) shift
             reset_machine_id target "$@"
             ;;
-        ?(--)maintain ) shift
+        ?\(--\)maintain ) shift
             maintain target "$@"
             ;;
 	* )
@@ -2153,22 +2153,22 @@ manage_sdk() {
     fi
 
     case $1 in
-	?(--)version )
+	?\(--\)version )
 	    get_sdk_version
 	    ;;
-	?(--)status )
+	?\(--\)status )
 	    sdk_status
 	    ;;
-	?(--)upgradable ) shift
+	?\(--\)upgradable ) shift
             object_upgradable sdk "$@"
 	    ;;
-	?(--)upgrade ) shift
+	?\(--\)upgrade ) shift
             upgrade_object sdk "$@"
 	    ;;
-	?(--)refresh )
+	?\(--\)refresh )
             refresh_objects sdk "$@"
 	    ;;
-	?(--)register ) shift
+	?\(--\)register ) shift
             register_object sdk "$@"
 	    ;;
 	* )
@@ -2309,7 +2309,7 @@ while (( $# > 0)); do
             echo "$0, version VERSION_FROM_SPEC"
             exit 0
             ;;
-        -h|?(--)help)
+        -h|?\(--\)help)
             help
             exit 0
             ;;
@@ -2321,27 +2321,27 @@ while (( $# > 0)); do
 done
 
 case $1 in
-    ?(--)tooling ) shift
+    ?\(--\)tooling ) shift
         manage_toolings "$@"
 	;;
-    ?(--)target ) shift
+    ?\(--\)target ) shift
 	manage_targets "$@"
 	;;
-    ?(--)toolchain ) shift
+    ?\(--\)toolchain ) shift
 	manage_toolchains "$@"
 	;;
-    ?(--)devel?(pkg) ) shift
+    ?\(--\)devel?\(pkg\) ) shift
 	manage_develpkgs "$@"
 	;;
-    ?(--)sdk ) shift
+    ?\(--\)sdk ) shift
 	manage_sdk "$@"
 	;;
-    ?(--)refresh-all ) shift
+    ?\(--\)refresh-all ) shift
         manage_targets refresh --all || exit
         manage_toolings refresh --all || exit
         [[ ${1:-} == --no-sdk ]] || manage_sdk refresh
 	;;
-    ?(--)register-all ) shift
+    ?\(--\)register-all ) shift
         register_all "$@"
         ;;
     * )
